@@ -130,7 +130,7 @@ def translate_add(self,sentence):
 @app.route("/test")
 def translate(sentence="test"):
   sentence = str(request.args.get("sentence", sentence))
-  res = translate_add.delay(sentence)
+  res = dialogue_add.delay(sentence)
   context = {"id": res.task_id, "sentence": sentence}
   result = "add((sentence):{})".format(context['sentence'])
   goto = "{}".format(context['id'])
@@ -138,7 +138,7 @@ def translate(sentence="test"):
 
 @app.route("/test/result/<task_id>")
 def show_result(task_id):
-  retval = str(translate_add.AsyncResult(task_id).get())
+  retval = str(dialogue_add.AsyncResult(task_id).get())
   print(retval.decode('utf-8'))
   retval_decode = retval.decode('utf-8')
   context = {"translate_result": retval_decode}
