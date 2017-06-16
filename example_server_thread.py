@@ -122,7 +122,7 @@ def translate_add(self,sentence):
     # If there is an EOS symbol in outputs, cut them at that point.
   if data_utils.EOS_ID in outputs:
     outputs = outputs[:outputs.index(data_utils.EOS_ID)]
-    # Print out French sentence corresponding to outputs.
+    # Print out answer sentence corresponding to outputs.
   result = " ".join([tf.compat.as_str(rev_ans_vocab[output]) for output in outputs])
   print("Server sent data:%s" % result)
   return result
