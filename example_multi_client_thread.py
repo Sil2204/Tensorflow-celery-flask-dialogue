@@ -28,7 +28,10 @@ class ClientThread(Thread):
     elapsed_time = time.time() - start_time
     print r2.json()['result'.decode('utf-8')]
     f = file("result.log", "a")
-    f.write(str(elapsed_time) + "\n")
+    sutf8 = u''.join(r2.json()['result']).strip()
+    print sutf8
+    sutf9 = sutf8.encode('UTF-8')
+    f.write(sutf9 + "\t" + "Elapsed_time=" + str(elapsed_time) + "\n")
     f.close
 
 def main():
